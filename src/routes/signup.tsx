@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { SiteHeader } from "@/components/SiteHeader";
 import { toast } from "sonner";
+import farmerAsset from "@/assets/farmer.jpg.asset.json";
 
 export const Route = createFileRoute("/signup")({
   head: () => ({ meta: [{ title: "Create account · PoultryFit Kenya" }] }),
