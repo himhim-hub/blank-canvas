@@ -38,9 +38,16 @@ function SignUpPage() {
     <div className="min-h-screen bg-background">
       <SiteHeader />
       <main className="mx-auto grid max-w-5xl gap-10 px-6 py-14 md:grid-cols-2">
-        <div className="hidden md:block">
-          <h1 className="font-display text-4xl leading-tight">A planner made for your yard.</h1>
-          <p className="mt-4 text-muted-foreground">
+        <div className="hidden md:flex md:flex-col">
+          <div className="aspect-[4/5] overflow-hidden rounded-3xl border-4 border-white shadow-[0_30px_60px_-20px_rgba(0,60,30,0.35)] ring-1 ring-gold/40">
+            <img
+              src={farmerAsset.url}
+              alt="Kenyan farmer tending to her urban backyard flock"
+              className="h-full w-full object-cover"
+            />
+          </div>
+          <h1 className="mt-6 font-display text-3xl leading-tight">A planner made for your yard.</h1>
+          <p className="mt-3 text-muted-foreground">
             Create an account to save your plan. We only ask what we need to size your flock —
             no long forms, no fluff.
           </p>
