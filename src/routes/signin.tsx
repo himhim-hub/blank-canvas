@@ -36,7 +36,20 @@ function SignInPage() {
   return (
     <div className="min-h-screen bg-background">
       <SiteHeader />
-      <main className="mx-auto max-w-md px-6 py-16">
+      <main className="mx-auto grid max-w-5xl gap-10 px-6 py-14 md:grid-cols-2">
+        <div className="hidden md:flex md:flex-col">
+          <div className="aspect-[4/5] overflow-hidden rounded-3xl border-4 border-white shadow-[0_30px_60px_-20px_rgba(0,60,30,0.35)] ring-1 ring-gold/40">
+            <img
+              src={coopAsset.url}
+              alt="Urban backyard coop in Nairobi"
+              className="h-full w-full object-cover"
+            />
+          </div>
+          <h1 className="mt-6 font-display text-3xl leading-tight">Karibu tena.</h1>
+          <p className="mt-3 text-muted-foreground">
+            Sign in to pick up your flock plan where you left off.
+          </p>
+        </div>
         <form onSubmit={submit} className="rounded-3xl border border-border bg-card p-8 shadow-sm">
           <h2 className="font-display text-2xl">Sign in</h2>
           <p className="mt-1 text-sm text-muted-foreground">Back to your flock plan.</p>
