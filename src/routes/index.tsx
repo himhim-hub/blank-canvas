@@ -32,50 +32,77 @@ function Landing() {
     <div className="min-h-screen bg-background">
       <SiteHeader />
 
+      {/* HERO with washed background image */}
       <section className="relative overflow-hidden">
-        <div className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-gold/25 blur-3xl" />
-        <div className="pointer-events-none absolute -left-24 top-40 h-80 w-80 rounded-full bg-leaf/15 blur-3xl" />
+        {/* Background image */}
+        <div className="absolute inset-0">
+          <img
+            src={heroAsset.url}
+            alt=""
+            aria-hidden
+            className="h-full w-full object-cover"
+          />
+          {/* Washes: green tint + ivory fade + gold glow */}
+          <div className="absolute inset-0 bg-[linear-gradient(120deg,oklch(0.42_0.13_150/0.78),oklch(0.985_0.012_95/0.55)_55%,oklch(0.78_0.14_85/0.35))]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,oklch(0.78_0.14_85/0.35),transparent_60%)]" />
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background" />
+        </div>
 
-        <div className="mx-auto grid max-w-5xl items-center gap-10 px-6 py-12 md:grid-cols-2 md:py-16">
-          <div>
-            <h1 className="font-display text-4xl leading-[1.05] tracking-tight md:text-5xl">
-              Karibu. <span className="gold-underline">Raise a healthier flock.</span>
-            </h1>
-            <p className="mt-4 max-w-md text-base text-muted-foreground">
-              Space, feed, health and a vet nearby. All in one app.
-            </p>
+        <div className="relative mx-auto max-w-5xl px-6 py-24 md:py-32">
+          <span className="inline-flex items-center gap-2 rounded-full border border-gold/50 bg-background/60 px-3 py-1 text-xs font-medium text-gold backdrop-blur">
+            <span className="h-1.5 w-1.5 rounded-full bg-gold" /> Pilot in Nairobi & Kisumu
+          </span>
+          <h1 className="mt-5 max-w-3xl font-display text-5xl leading-[1.02] tracking-tight text-white drop-shadow-[0_2px_8px_rgba(0,40,20,0.45)] md:text-7xl">
+            Karibu. <br />
+            <span className="gold-underline">Raise a healthier flock.</span>
+          </h1>
+          <p className="mt-5 max-w-xl text-lg text-white/90 drop-shadow">
+            Space, feed, health and a vet nearby — all in one calm, practical app made for
+            Kenyan backyards.
+          </p>
 
-            <div className="mt-7 flex flex-wrap gap-3">
-              <Link to="/signup">
-                <Button size="lg" className="gap-2">
-                  Get started <ArrowRight className="h-4 w-4" />
-                </Button>
-              </Link>
-              <Link to="/signin">
-                <Button size="lg" variant="outline">
-                  Sign in
-                </Button>
-              </Link>
-            </div>
-
-            <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4 md:max-w-md">
-              <Tile icon={Ruler} label="Flock size" />
-              <Tile icon={Wheat} label="Feed plan" />
-              <Tile icon={Stethoscope} label="Health" />
-              <Tile icon={MapPin} label="Find a vet" />
-            </div>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link to="/signup">
+              <Button size="lg" className="gap-2 bg-gold text-[oklch(0.2_0.04_80)] hover:bg-gold-deep">
+                Create your account <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
+            <Link to="/signin">
+              <Button size="lg" variant="outline" className="border-white/60 bg-white/10 text-white backdrop-blur hover:bg-white/20 hover:text-white">
+                I already have one
+              </Button>
+            </Link>
           </div>
+        </div>
+      </section>
 
-          <div className="relative">
-            <div className="aspect-[4/5] overflow-hidden rounded-3xl border-4 border-white shadow-[0_30px_60px_-20px_rgba(0,60,30,0.35)] ring-1 ring-gold/40">
-              <img
-                src={heroAsset.url}
-                alt="Kenyan smallholder with her flock"
-                width={1600}
-                height={1104}
-                className="h-full w-full object-cover"
-              />
+      {/* What's inside */}
+      <section className="mx-auto max-w-5xl px-6 py-16">
+        <div className="flex items-end justify-between gap-6">
+          <div>
+            <p className="text-sm font-medium uppercase tracking-widest text-gold">What's inside</p>
+            <h2 className="mt-2 font-display text-3xl md:text-4xl">Everything a keeper actually needs.</h2>
+          </div>
+        </div>
+
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <Tile icon={Ruler} title="Flock size" body="Right-size your yard to avoid crowding and disease." />
+          <Tile icon={Wheat} title="Feed plan" body="Daily rations and monthly cost for your birds." />
+          <Tile icon={Stethoscope} title="Health triage" body="Quick checks and next steps when a bird looks off." />
+          <Tile icon={MapPin} title="Find a vet" body="Nearby vets and agrovets, mapped by county." />
+        </div>
+
+        <div className="mt-14 rounded-3xl border border-gold/40 bg-leaf/[0.06] p-8 md:p-10">
+          <div className="flex flex-wrap items-center justify-between gap-6">
+            <div>
+              <h3 className="font-display text-2xl md:text-3xl">Ready when you are.</h3>
+              <p className="mt-1 text-muted-foreground">Free while in pilot. Takes a minute to set up.</p>
             </div>
+            <Link to="/signup">
+              <Button size="lg" className="gap-2">
+                Create your account <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -85,17 +112,20 @@ function Landing() {
 
 function Tile({
   icon: Icon,
-  label,
+  title,
+  body,
 }: {
   icon: React.ComponentType<{ className?: string }>;
-  label: string;
+  title: string;
+  body: string;
 }) {
   return (
-    <div className="flex flex-col items-center gap-2 rounded-2xl border border-border bg-card p-3 text-center">
-      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-leaf/10 text-leaf">
+    <div className="group rounded-2xl border border-border bg-card p-5 transition hover:border-gold/60 hover:shadow-[0_10px_30px_-15px_oklch(0.42_0.13_150/0.4)]">
+      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-leaf/10 text-leaf">
         <Icon className="h-5 w-5" />
       </div>
-      <span className="text-xs font-medium">{label}</span>
+      <h3 className="mt-4 font-display text-lg">{title}</h3>
+      <p className="mt-1 text-sm text-muted-foreground">{body}</p>
     </div>
   );
 }
