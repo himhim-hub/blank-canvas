@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { useAuth } from "@/hooks/use-auth";
-import { saveProfile, type HousingType, type BirdGoal, type Experience, type PoultryType } from "@/lib/auth";
+import { saveProfile, type HousingType, type BirdGoal, type Experience, type PoultryType, type StartingStage } from "@/lib/auth";
 import { COUNTIES } from "@/lib/poultry-data";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
