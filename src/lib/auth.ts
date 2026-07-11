@@ -17,14 +17,19 @@ export type Experience = "first-time" | "some" | "experienced";
 export type BirdGoal = "eggs" | "meat" | "dual";
 export type PoultryType = "chicken" | "duck" | "turkey" | "goose" | "quail" | "guinea-fowl";
 
+export type StartingStage = "chick" | "grower" | "layer";
+
 export interface FarmerProfile {
   county: string;
   ward?: string;
-  spaceM2: number;      // available floor space in m²
+  spaceM2: number;      // available floor space in m² (derived from length × width)
+  lengthM?: number;     // raw yard length in metres
+  widthM?: number;      // raw yard width in metres
   budgetKes: number;    // startup budget in KES
   housing: HousingType;
   goal: BirdGoal;
   experience: Experience;
+  startingStage: StartingStage;
   poultryTypes: PoultryType[];
   createdAt: string;
 }
