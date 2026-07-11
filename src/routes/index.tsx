@@ -50,15 +50,14 @@ function Landing() {
 
         <div className="relative mx-auto max-w-5xl px-6 py-24 md:py-32">
           <span className="inline-flex items-center gap-2 rounded-full border border-gold/50 bg-background/60 px-3 py-1 text-xs font-medium text-gold backdrop-blur">
-            <span className="h-1.5 w-1.5 rounded-full bg-gold" /> Pilot in Nairobi & Kisumu
+            <span className="h-1.5 w-1.5 rounded-full bg-gold" /> Kenya wide
           </span>
           <h1 className="mt-5 max-w-3xl font-display text-5xl leading-[1.02] tracking-tight text-white drop-shadow-[0_2px_8px_rgba(0,40,20,0.45)] md:text-7xl">
             Karibu. <br />
             <span className="gold-underline">Raise a healthier flock.</span>
           </h1>
           <p className="mt-5 max-w-xl text-lg text-white/90 drop-shadow">
-            Space, feed, health and a vet nearby — all in one calm, practical app made for
-            Kenyan backyards.
+            Space, feed, health and a vet nearby all come together in one calm, practical app made for Kenyan backyards.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
@@ -86,24 +85,10 @@ function Landing() {
         </div>
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <Tile icon={Ruler} title="Flock size" body="Right-size your yard to avoid crowding and disease." />
-          <Tile icon={Wheat} title="Feed plan" body="Daily rations and monthly cost for your birds." />
-          <Tile icon={Stethoscope} title="Health triage" body="Quick checks and next steps when a bird looks off." />
-          <Tile icon={MapPin} title="Find a vet" body="Nearby vets and agrovets, mapped by county." />
-        </div>
-
-        <div className="mt-14 rounded-3xl border border-gold/40 bg-leaf/[0.06] p-8 md:p-10">
-          <div className="flex flex-wrap items-center justify-between gap-6">
-            <div>
-              <h3 className="font-display text-2xl md:text-3xl">Ready when you are.</h3>
-              <p className="mt-1 text-muted-foreground">Free while in pilot. Takes a minute to set up.</p>
-            </div>
-            <Link to="/signup">
-              <Button size="lg" className="gap-2">
-                Create your account <ArrowRight className="h-4 w-4" />
-              </Button>
-            </Link>
-          </div>
+          <Tile icon={Ruler} title="Flock size" body="Size your flock to fit your space." />
+          <Tile icon={Wheat} title="Feed plan" body="Daily rations and monthly feed cost." />
+          <Tile icon={Stethoscope} title="Health triage" body="Check symptoms and know the next step." />
+          <Tile icon={MapPin} title="Find a vet" body="Locate nearby vets and agrovets." />
         </div>
       </section>
     </div>
