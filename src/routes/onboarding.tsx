@@ -31,11 +31,14 @@ function OnboardingPage() {
   const [county, setCounty] = useState<string>("Kiambu");
   const [ward, setWard] = useState("");
   const [poultryTypes, setPoultryTypes] = useState<PoultryType[]>(["chicken"]);
-  const [spaceM2, setSpaceM2] = useState<number>(6);
+  const [lengthM, setLengthM] = useState<number>(3);
+  const [widthM, setWidthM] = useState<number>(2);
+  const spaceM2 = Math.max(0, Math.round(lengthM * widthM));
   const [budgetKes, setBudgetKes] = useState<number>(15000);
   const [housing, setHousing] = useState<HousingType>("deep-litter");
   const [goal, setGoal] = useState<BirdGoal>("eggs");
   const [experience, setExperience] = useState<Experience>("first-time");
+  const [startingStage, setStartingStage] = useState<StartingStage>("chick");
 
   if (ready && !user) {
     return (
