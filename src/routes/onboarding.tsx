@@ -149,9 +149,30 @@ function OnboardingPage() {
           {step === 2 && (
             <div className="mt-6 space-y-5">
               <div>
-                <Label>Available space (m²)</Label>
-                <Input type="number" min={1} max={500} value={spaceM2} onChange={(e) => setSpaceM2(+e.target.value)} />
-                <p className="mt-1 text-xs text-muted-foreground">Roughly measure the floor of the coop or run you can build.</p>
+                <Label>Yard dimensions</Label>
+                <div className="mt-1 grid grid-cols-2 gap-3">
+                  <div>
+                    <Input
+                      type="number" min={1} max={100} step={0.5}
+                      value={lengthM}
+                      onChange={(e) => setLengthM(+e.target.value)}
+                      placeholder="Length"
+                    />
+                    <p className="mt-1 text-xs text-muted-foreground">Length (m)</p>
+                  </div>
+                  <div>
+                    <Input
+                      type="number" min={1} max={100} step={0.5}
+                      value={widthM}
+                      onChange={(e) => setWidthM(+e.target.value)}
+                      placeholder="Width"
+                    />
+                    <p className="mt-1 text-xs text-muted-foreground">Width (m)</p>
+                  </div>
+                </div>
+                <p className="mt-2 text-xs text-muted-foreground">
+                  ≈ <span className="font-medium text-foreground">{spaceM2} m²</span> of floor for the coop or run.
+                </p>
               </div>
               <div>
                 <Label>Startup budget (KES)</Label>
