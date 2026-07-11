@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { useAuth } from "@/hooks/use-auth";
-import { saveProfile, type HousingType, type BirdGoal, type Experience, type PoultryType } from "@/lib/auth";
+import { saveProfile, type HousingType, type BirdGoal, type Experience, type PoultryType, type StartingStage } from "@/lib/auth";
 import { COUNTIES } from "@/lib/poultry-data";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -31,11 +31,14 @@ function OnboardingPage() {
   const [county, setCounty] = useState<string>("Kiambu");
   const [ward, setWard] = useState("");
   const [poultryTypes, setPoultryTypes] = useState<PoultryType[]>(["chicken"]);
-  const [spaceM2, setSpaceM2] = useState<number>(6);
+  const [lengthM, setLengthM] = useState<number>(3);
+  const [widthM, setWidthM] = useState<number>(2);
+  const spaceM2 = Math.max(0, Math.round(lengthM * widthM));
   const [budgetKes, setBudgetKes] = useState<number>(15000);
   const [housing, setHousing] = useState<HousingType>("deep-litter");
   const [goal, setGoal] = useState<BirdGoal>("eggs");
   const [experience, setExperience] = useState<Experience>("first-time");
+  const [startingStage, setStartingStage] = useState<StartingStage>("chick");
 
   if (ready && !user) {
     return (
@@ -59,7 +62,8 @@ function OnboardingPage() {
     }
     saveProfile({
       county, ward: ward.trim() || undefined,
-      spaceM2, budgetKes, housing, goal, experience,
+      spaceM2, lengthM, widthM,
+      budgetKes, housing, goal, experience, startingStage,
       poultryTypes,
       createdAt: new Date().toISOString(),
     });
@@ -145,9 +149,30 @@ function OnboardingPage() {
           {step === 2 && (
             <div className="mt-6 space-y-5">
               <div>
-                <Label>Available space (m²)</Label>
-                <Input type="number" min={1} max={500} value={spaceM2} onChange={(e) => setSpaceM2(+e.target.value)} />
-                <p className="mt-1 text-xs text-muted-foreground">Roughly measure the floor of the coop or run you can build.</p>
+                <Label>Yard dimensions</Label>
+                <div className="mt-1 grid grid-cols-2 gap-3">
+                  <div>
+                    <Input
+                      type="number" min={1} max={100} step={0.5}
+                      value={lengthM}
+                      onChange={(e) => setLengthM(+e.target.value)}
+                      placeholder="Length"
+                    />
+                    <p className="mt-1 text-xs text-muted-foreground">Length (m)</p>
+                  </div>
+                  <div>
+                    <Input
+                      type="number" min={1} max={100} step={0.5}
+                      value={widthM}
+                      onChange={(e) => setWidthM(+e.target.value)}
+                      placeholder="Width"
+                    />
+                    <p className="mt-1 text-xs text-muted-foreground">Width (m)</p>
+                  </div>
+                </div>
+                <p className="mt-2 text-xs text-muted-foreground">
+                  ≈ <span className="font-medium text-foreground">{spaceM2} m²</span> of floor for the coop or run.
+                </p>
               </div>
               <div>
                 <Label>Startup budget (KES)</Label>
@@ -198,6 +223,29 @@ function OnboardingPage() {
                     <button key={v} type="button" onClick={() => setExperience(v)}
                       className={cn("rounded-lg border px-3 py-2 text-sm", experience === v ? "border-primary bg-primary/10 text-primary" : "border-border hover:border-primary/50")}>
                       {label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <Label>What are you starting with?</Label>
+                <div className="mt-2 grid gap-2">
+                  {([
+                    ["chick",  "Day-old chicks",              "Takes longer to first eggs, but costs less per bird up front."],
+                    ["grower", "Growers (a few weeks old)",   "A middle ground on cost and time to first eggs."],
+                    ["layer",  "Point-of-lay or mature birds","Costs more per bird, but starts producing eggs immediately."],
+                  ] as [StartingStage, string, string][]).map(([v, label, hint]) => (
+                    <button
+                      key={v}
+                      type="button"
+                      onClick={() => setStartingStage(v)}
+                      className={cn(
+                        "rounded-lg border px-3 py-2 text-left text-sm transition",
+                        startingStage === v ? "border-primary bg-primary/10" : "border-border hover:border-primary/50",
+                      )}
+                    >
+                      <div className={cn("font-medium", startingStage === v && "text-primary")}>{label}</div>
+                      <div className="mt-0.5 text-xs text-muted-foreground">{hint}</div>
                     </button>
                   ))}
                 </div>

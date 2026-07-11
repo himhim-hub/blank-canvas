@@ -25,14 +25,14 @@ export function FeasibilityModule({ profile }: { profile: FarmerProfile }) {
           icon={Ruler}
           label="By space"
           value={result.maxBySpace}
-          hint={`${profile.spaceM2} m² ÷ ${perBird} m²/bird (${profile.housing.replace("-", " ")})`}
+          hint={`${profile.lengthM && profile.widthM ? `${profile.lengthM}m × ${profile.widthM}m = ` : ""}${profile.spaceM2} m² ÷ ${perBird} m²/bird (${profile.housing.replace("-", " ")})`}
           binding={result.bindingConstraint === "space"}
         />
         <Constraint
           icon={Wallet}
           label="By budget"
           value={result.maxByBudget}
-          hint={`KES ${profile.budgetKes.toLocaleString()} ÷ KES ${STARTUP_COST_PER_BIRD}/bird startup`}
+          hint={`KES ${profile.budgetKes.toLocaleString()} ÷ KES ${STARTUP_COST_PER_BIRD[profile.startingStage]}/bird (${stageLabel(profile.startingStage)})`}
           binding={result.bindingConstraint === "budget"}
         />
         {result.maxByBylaw !== null && (
@@ -77,4 +77,8 @@ function Constraint({
       <p className="font-display text-2xl">{value}</p>
     </div>
   );
+}
+
+function stageLabel(s: FarmerProfile["startingStage"]) {
+  return s === "chick" ? "day-old chicks" : s === "grower" ? "growers" : "point-of-lay";
 }

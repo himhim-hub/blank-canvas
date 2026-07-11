@@ -38,8 +38,14 @@ export const SPACE_PER_BIRD: Record<string, number> = {
   "free-range":    1.0,
 };
 
-// Startup cost per bird (KES) — chick + brooder share + basic equipment
-export const STARTUP_COST_PER_BIRD = 350;
+// Startup cost per bird (KES) by starting stage — day-old chick + brooder share is
+// cheapest; growers cost more (already fed for weeks); point-of-lay pullets cost the
+// most but start producing immediately. Reasonable Kenyan agrovet gaps (2025).
+export const STARTUP_COST_PER_BIRD: Record<BirdStage, number> = {
+  chick:  180,
+  grower: 500,
+  layer:  850,
+};
 
 // Feed ingredients — indicative Kenyan agrovet prices (KES per kg)
 export interface FeedIngredient {
