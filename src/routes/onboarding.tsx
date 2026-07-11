@@ -62,7 +62,8 @@ function OnboardingPage() {
     }
     saveProfile({
       county, ward: ward.trim() || undefined,
-      spaceM2, budgetKes, housing, goal, experience,
+      spaceM2, lengthM, widthM,
+      budgetKes, housing, goal, experience, startingStage,
       poultryTypes,
       createdAt: new Date().toISOString(),
     });
