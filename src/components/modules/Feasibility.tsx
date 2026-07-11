@@ -78,3 +78,7 @@ function Constraint({
     </div>
   );
 }
+
+function stageLabel(s: FarmerProfile["startingStage"]) {
+  return s === "chick" ? "day-old chicks" : s === "grower" ? "growers" : "point-of-lay";
+}
