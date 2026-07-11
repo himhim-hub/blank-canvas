@@ -32,7 +32,7 @@ export function FeasibilityModule({ profile }: { profile: FarmerProfile }) {
           icon={Wallet}
           label="By budget"
           value={result.maxByBudget}
-          hint={`KES ${profile.budgetKes.toLocaleString()} ÷ KES ${STARTUP_COST_PER_BIRD}/bird startup`}
+          hint={`KES ${profile.budgetKes.toLocaleString()} ÷ KES ${STARTUP_COST_PER_BIRD[profile.startingStage]}/bird (${stageLabel(profile.startingStage)})`}
           binding={result.bindingConstraint === "budget"}
         />
         {result.maxByBylaw !== null && (
