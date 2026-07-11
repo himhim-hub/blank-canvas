@@ -19,7 +19,8 @@ export interface FeasibilityResult {
 export function computeFeasibility(p: FarmerProfile): FeasibilityResult {
   const perBird = SPACE_PER_BIRD[p.housing] ?? 0.5;
   const maxBySpace = Math.max(0, Math.floor(p.spaceM2 / perBird));
-  const maxByBudget = Math.max(0, Math.floor(p.budgetKes / STARTUP_COST_PER_BIRD));
+  const costPerBird = STARTUP_COST_PER_BIRD[p.startingStage] ?? STARTUP_COST_PER_BIRD.chick;
+  const maxByBudget = Math.max(0, Math.floor(p.budgetKes / costPerBird));
   const bylaw = COUNTY_BYLAWS[p.county];
   const maxByBylaw = bylaw ? bylaw.urbanMaxBackyard : null;
 
