@@ -227,6 +227,29 @@ function OnboardingPage() {
                   ))}
                 </div>
               </div>
+              <div>
+                <Label>What are you starting with?</Label>
+                <div className="mt-2 grid gap-2">
+                  {([
+                    ["chick",  "Day-old chicks",              "Takes longer to first eggs, but costs less per bird up front."],
+                    ["grower", "Growers (a few weeks old)",   "A middle ground on cost and time to first eggs."],
+                    ["layer",  "Point-of-lay or mature birds","Costs more per bird, but starts producing eggs immediately."],
+                  ] as [StartingStage, string, string][]).map(([v, label, hint]) => (
+                    <button
+                      key={v}
+                      type="button"
+                      onClick={() => setStartingStage(v)}
+                      className={cn(
+                        "rounded-lg border px-3 py-2 text-left text-sm transition",
+                        startingStage === v ? "border-primary bg-primary/10" : "border-border hover:border-primary/50",
+                      )}
+                    >
+                      <div className={cn("font-medium", startingStage === v && "text-primary")}>{label}</div>
+                      <div className="mt-0.5 text-xs text-muted-foreground">{hint}</div>
+                    </button>
+                  ))}
+                </div>
+              </div>
             </div>
           )}
 
