@@ -25,7 +25,7 @@ export function FeasibilityModule({ profile }: { profile: FarmerProfile }) {
           icon={Ruler}
           label="By space"
           value={result.maxBySpace}
-          hint={`${profile.spaceM2} m² ÷ ${perBird} m²/bird (${profile.housing.replace("-", " ")})`}
+          hint={`${profile.lengthM && profile.widthM ? `${profile.lengthM}m × ${profile.widthM}m = ` : ""}${profile.spaceM2} m² ÷ ${perBird} m²/bird (${profile.housing.replace("-", " ")})`}
           binding={result.bindingConstraint === "space"}
         />
         <Constraint
