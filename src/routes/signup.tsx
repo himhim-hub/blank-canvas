@@ -6,7 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { SiteHeader } from "@/components/SiteHeader";
 import { toast } from "sonner";
-import farmerAsset from "@/assets/farmer.jpg.asset.json";
+
+const farmerImage = "/__l5e/assets-v1/5eb46824-d4f1-428a-b52f-b5f1a1b6bd23/farmer.jpg";
 
 export const Route = createFileRoute("/signup")({
   head: () => ({ meta: [{ title: "Create account · PoultryFit Kenya" }] }),
@@ -38,7 +39,7 @@ function SignUpPage() {
     <div className="relative min-h-screen">
       {/* Background image + washes */}
       <div className="absolute inset-0 -z-10">
-        <img src={farmerAsset.url} alt="" aria-hidden className="h-full w-full object-cover" />
+        <img src={farmerImage} alt="" aria-hidden className="h-full w-full object-cover" />
         <div className="absolute inset-0 bg-[linear-gradient(135deg,oklch(0.42_0.13_150/0.85),oklch(0.22_0.04_155/0.6)_55%,oklch(0.78_0.14_85/0.5))]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,oklch(0.78_0.14_85/0.4),transparent_60%)]" />
       </div>

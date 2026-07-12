@@ -4,7 +4,8 @@ import { Button } from "@/components/ui/button";
 import { SiteHeader } from "@/components/SiteHeader";
 import { useAuth } from "@/hooks/use-auth";
 import { ArrowRight, Ruler, Wheat, Stethoscope, MapPin } from "lucide-react";
-import heroAsset from "@/assets/mixed-flock.jpg.asset.json";
+
+const heroImage = "/__l5e/assets-v1/e474551b-68e3-4741-b1f1-6863395158a0/mixed-flock.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -13,7 +14,7 @@ export const Route = createFileRoute("/")({
       { name: "description", content: "Plan your flock the smart way. Built for Kenyan keepers." },
       { property: "og:title", content: "PoultryFit Kenya" },
       { property: "og:description", content: "Plan your flock the smart way." },
-      { property: "og:image", content: heroAsset.url },
+      { property: "og:image", content: heroImage },
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
@@ -37,7 +38,7 @@ function Landing() {
         {/* Background image */}
         <div className="absolute inset-0">
           <img
-            src={heroAsset.url}
+            src={heroImage}
             alt=""
             aria-hidden
             className="h-full w-full object-cover"

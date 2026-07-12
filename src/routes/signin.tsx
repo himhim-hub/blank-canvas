@@ -6,7 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { SiteHeader } from "@/components/SiteHeader";
 import { toast } from "sonner";
-import coopAsset from "@/assets/coop.jpg.asset.json";
+
+const coopImage = "/__l5e/assets-v1/00511387-e354-4cbf-bd58-196c478af958/coop.jpg";
 
 export const Route = createFileRoute("/signin")({
   head: () => ({ meta: [{ title: "Sign in · PoultryFit Kenya" }] }),
@@ -37,7 +38,7 @@ function SignInPage() {
     <div className="relative min-h-screen">
       {/* Background image + washes */}
       <div className="absolute inset-0 -z-10">
-        <img src={coopAsset.url} alt="" aria-hidden className="h-full w-full object-cover" />
+        <img src={coopImage} alt="" aria-hidden className="h-full w-full object-cover" />
         <div className="absolute inset-0 bg-[linear-gradient(135deg,oklch(0.42_0.13_150/0.85),oklch(0.22_0.04_155/0.65)_60%,oklch(0.78_0.14_85/0.45))]" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,oklch(0.78_0.14_85/0.35),transparent_60%)]" />
       </div>
