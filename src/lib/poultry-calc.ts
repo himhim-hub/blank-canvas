@@ -64,7 +64,9 @@ export interface FeedPlan {
  * that hits the stage's target protein. Not a full linear program, but honest
  * for an early-decision planner. Real API can swap in a proper LP later.
  */
-export function computeFeedPlan(stage: BirdStage, birds: number): FeedPlan {
+export function computeFeedPlan(stage: BirdStage, birds: number, _county?: string): FeedPlan {
+  // county is accepted for future regional pricing; unused today.
+  void _county;
   const target = STAGE_TARGET[stage];
   // Build candidate two-ingredient mixes across (energy source, protein source, filler).
   const energySources = FEED_INGREDIENTS.filter((i) => i.energyKcal >= 2500 && i.proteinPct < 20);
