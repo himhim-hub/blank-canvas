@@ -92,7 +92,7 @@ function Dashboard() {
 
           <TabsContent value="feed" className="mt-6">
             <ModuleHeader title="Feed plan" desc="Cheapest mix from local agrovets." />
-            <FeedPlanModule defaultBirds={feas.recommended || 10} />
+            <FeedPlanModule profile={profile} birds={feas.recommended || 10} />
           </TabsContent>
 
           <TabsContent value="health" className="mt-6">

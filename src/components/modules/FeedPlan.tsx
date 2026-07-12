@@ -1,35 +1,93 @@
 import { useMemo, useState } from "react";
 import { computeFeedPlan } from "@/lib/poultry-calc";
 import type { BirdStage } from "@/lib/poultry-data";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
+import type { FarmerProfile } from "@/lib/auth";
 import { cn } from "@/lib/utils";
 
-export function FeedPlanModule({ defaultBirds }: { defaultBirds: number }) {
-  const [birds, setBirds] = useState(defaultBirds);
-  const [stage, setStage] = useState<BirdStage>("layer");
-  const plan = useMemo(() => computeFeedPlan(stage, Math.max(1, birds)), [stage, birds]);
+const STAGE_META: Record<BirdStage, { label: string; weeks: string; order: number }> = {
+  chick:  { label: "Chick",       weeks: "0–8 wks",  order: 0 },
+  grower: { label: "Grower",      weeks: "9–18 wks", order: 1 },
+  layer:  { label: "Point-of-lay",weeks: "19+ wks",  order: 2 },
+};
+
+export function FeedPlanModule({ profile, birds }: { profile: FarmerProfile; birds: number }) {
+  const startOrder = STAGE_META[profile.startingStage].order;
+  const trajectoryStages = (Object.keys(STAGE_META) as BirdStage[])
+    .filter((s) => STAGE_META[s].order >= startOrder)
+    .sort((a, b) => STAGE_META[a].order - STAGE_META[b].order);
+
+  const [stage, setStage] = useState<BirdStage>(profile.startingStage);
+  const plan = useMemo(
+    () => computeFeedPlan(stage, Math.max(1, birds), profile.county),
+    [stage, birds, profile.county],
+  );
+
+  const trajectory = useMemo(
+    () => trajectoryStages.map((s) => ({ stage: s, plan: computeFeedPlan(s, Math.max(1, birds), profile.county) })),
+    [trajectoryStages, birds, profile.county],
+  );
+
+  const locationLabel = profile.ward?.trim() ? profile.ward.trim() : profile.county;
 
   return (
     <div className="space-y-6">
-      <div className="grid gap-4 md:grid-cols-3">
-        <div>
-          <Label>Number of birds</Label>
-          <Input type="number" min={1} value={birds} onChange={(e) => setBirds(+e.target.value || 1)} />
+      <div className="rounded-2xl border border-border bg-card p-5">
+        <p className="text-xs uppercase tracking-wider text-muted-foreground">Feeding plan for</p>
+        <p className="mt-1 font-display text-2xl">
+          <span className="text-primary">{birds}</span> birds
+          <span className="text-muted-foreground text-base"> · flock size from your yard</span>
+        </p>
+      </div>
+
+      {trajectoryStages.length > 1 && (
+        <div className="rounded-2xl border border-border bg-card p-5">
+          <p className="text-xs uppercase tracking-wider text-muted-foreground">Cost trajectory</p>
+          <p className="mt-1 text-sm text-muted-foreground">Monthly feed cost as your flock grows through each stage.</p>
+          <div className="mt-4 grid gap-3 md:grid-cols-3">
+            {trajectory.map((t, i) => {
+              const active = t.stage === stage;
+              return (
+                <button
+                  key={t.stage}
+                  type="button"
+                  onClick={() => setStage(t.stage)}
+                  className={cn(
+                    "relative rounded-xl border p-4 text-left transition",
+                    active ? "border-primary bg-primary/5" : "border-border hover:border-primary/50",
+                  )}
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <span className={cn(
+                        "flex h-6 w-6 items-center justify-center rounded-full text-xs font-medium",
+                        active ? "bg-primary text-primary-foreground" : "bg-secondary text-muted-foreground",
+                      )}>{i + 1}</span>
+                      <span className="text-sm font-medium">{STAGE_META[t.stage].label}</span>
+                    </div>
+                    <span className="text-xs text-muted-foreground">{STAGE_META[t.stage].weeks}</span>
+                  </div>
+                  <p className="mt-3 font-display text-xl">KES {t.plan.monthlyCost.toLocaleString()}<span className="text-xs text-muted-foreground font-sans">/mo</span></p>
+                  <p className="text-xs text-muted-foreground">{t.plan.dailyKg} kg/day · {t.plan.proteinPct}% protein</p>
+                </button>
+              );
+            })}
+          </div>
         </div>
-        <div className="md:col-span-2">
-          <Label>Growth stage</Label>
-          <div className="mt-2 grid grid-cols-3 gap-2">
-            {(["chick", "grower", "layer"] as BirdStage[]).map((s) => (
+      )}
+
+      {trajectoryStages.length === 1 && (
+        <div>
+          <div className="grid grid-cols-1 gap-2">
+            {trajectoryStages.map((s) => (
               <button key={s} type="button" onClick={() => setStage(s)}
                 className={cn("rounded-lg border px-3 py-2 text-sm capitalize",
                   stage === s ? "border-primary bg-primary/10 text-primary" : "border-border hover:border-primary/50")}>
-                {s}
+                {STAGE_META[s].label}
               </button>
             ))}
           </div>
         </div>
-      </div>
+      )}
 
       <div className="grid gap-4 md:grid-cols-4">
         <Stat label="Daily feed" value={`${plan.dailyKg} kg`} />
@@ -40,7 +98,7 @@ export function FeedPlanModule({ defaultBirds }: { defaultBirds: number }) {
 
       <div className="rounded-2xl border border-border bg-card overflow-hidden">
         <div className="border-b border-border bg-secondary/50 px-5 py-3 text-sm font-medium">
-          Least-cost mix · KES {plan.costPerKg}/kg
+          Least-cost mix for {locationLabel} · KES {plan.costPerKg}/kg · {STAGE_META[stage].label} stage
         </div>
         <table className="w-full text-sm">
           <thead className="text-xs uppercase text-muted-foreground">
