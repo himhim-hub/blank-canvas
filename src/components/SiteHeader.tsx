@@ -3,6 +3,8 @@ import { useAuth } from "@/hooks/use-auth";
 import { signOut } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
+import logoAsset from "@/assets/logo.png.asset.json";
+
 
 export function SiteHeader() {
   const { user } = useAuth();
