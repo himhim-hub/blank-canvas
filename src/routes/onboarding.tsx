@@ -134,7 +134,7 @@ function OnboardingPage() {
                           : "border-border hover:border-primary/50",
                       )}
                     >
-                      <span className="text-2xl">{p.emoji}</span>
+                      <p.Icon className={cn("h-6 w-6", active ? "text-primary" : "text-muted-foreground")} strokeWidth={1.75} />
                       <span className="font-display text-base">{p.label}</span>
                       <span className="text-xs text-muted-foreground">{p.hint}</span>
                     </button>
