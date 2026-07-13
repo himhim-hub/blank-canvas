@@ -3,7 +3,7 @@ import { useAuth } from "@/hooks/use-auth";
 import { signOut } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
-import logoAsset from "@/assets/logo.png.asset.json";
+import logoAsset from "@/assets/logo.png";
 
 
 export function SiteHeader() {
@@ -13,7 +13,7 @@ export function SiteHeader() {
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4">
         <Link to="/" className="flex items-center">
           <img
-            src={logoAsset.url}
+            src={logoAsset}
             alt="PoultryFit Kenya"
             className="h-9 w-auto"
           />
