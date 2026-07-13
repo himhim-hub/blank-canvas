@@ -5,7 +5,7 @@ import { SiteHeader } from "@/components/SiteHeader";
 import { useAuth } from "@/hooks/use-auth";
 import { ArrowRight, Ruler, Wheat, Stethoscope, MapPin } from "lucide-react";
 
-const heroImage = "/__l5e/assets-v1/e474551b-68e3-4741-b1f1-6863395158a0/mixed-flock.jpg";
+import heroImage from "@/assets/mixed-flock.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({

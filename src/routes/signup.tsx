@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { SiteHeader } from "@/components/SiteHeader";
 import { toast } from "sonner";
 
-const farmerImage = "/__l5e/assets-v1/5eb46824-d4f1-428a-b52f-b5f1a1b6bd23/farmer.jpg";
+import farmerImage from "@/assets/farmer.jpg";
 
 export const Route = createFileRoute("/signup")({
   head: () => ({ meta: [{ title: "Create account · PoultryFit Kenya" }] }),

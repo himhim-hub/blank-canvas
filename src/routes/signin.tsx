@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { SiteHeader } from "@/components/SiteHeader";
 import { toast } from "sonner";
 
-const coopImage = "/__l5e/assets-v1/00511387-e354-4cbf-bd58-196c478af958/coop.jpg";
+import coopImage from "@/assets/coop.jpg";
 
 export const Route = createFileRoute("/signin")({
   head: () => ({ meta: [{ title: "Sign in · PoultryFit Kenya" }] }),
