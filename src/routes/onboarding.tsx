@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { useState, type ComponentType } from "react";
+import { useState } from "react";
 import { useAuth } from "@/hooks/use-auth";
 import { saveProfile, type HousingType, type BirdGoal, type Experience, type PoultryType, type StartingStage } from "@/lib/auth";
 import { COUNTIES } from "@/lib/poultry-data";
