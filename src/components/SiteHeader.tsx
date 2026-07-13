@@ -11,14 +11,14 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-30 border-b border-border/70 bg-background/85 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4">
-        <Link to="/" className="flex items-center gap-2.5">
-          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-primary text-primary-foreground font-display text-lg font-bold">
-            P
-          </span>
-          <span className="font-display text-lg font-semibold tracking-tight">
-            PoultryFit <span className="text-clay">Kenya</span>
-          </span>
+        <Link to="/" className="flex items-center">
+          <img
+            src={logoAsset.url}
+            alt="PoultryFit Kenya"
+            className="h-9 w-auto"
+          />
         </Link>
+
 
         <nav className="hidden items-center gap-6 text-sm text-muted-foreground md:flex">
           <Link to="/" activeOptions={{ exact: true }} className="hover:text-foreground data-[status=active]:text-foreground">Home</Link>
