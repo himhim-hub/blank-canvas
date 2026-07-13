@@ -9,19 +9,20 @@ import { Label } from "@/components/ui/label";
 import { SiteHeader } from "@/components/SiteHeader";
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
+import { Egg, Droplets, Drumstick, ShieldAlert, Feather, Bug, type LucideIcon } from "lucide-react";
 
 export const Route = createFileRoute("/onboarding")({
   head: () => ({ meta: [{ title: "Set up your yard · PoultryFit Kenya" }] }),
   component: OnboardingPage,
 });
 
-const POULTRY_OPTIONS: { id: PoultryType; label: string; emoji: string; hint: string }[] = [
-  { id: "chicken", label: "Chicken", emoji: "🐔", hint: "Eggs & meat" },
-  { id: "duck", label: "Duck", emoji: "🦆", hint: "Hardy, loves water" },
-  { id: "turkey", label: "Turkey", emoji: "🦃", hint: "Festive market" },
-  { id: "goose", label: "Goose", emoji: "🪿", hint: "Guards the yard" },
-  { id: "quail", label: "Quail", emoji: "🐦", hint: "Small space" },
-  { id: "guinea-fowl", label: "Guinea fowl", emoji: "🪶", hint: "Pest control" },
+const POULTRY_OPTIONS: { id: PoultryType; label: string; Icon: LucideIcon; hint: string }[] = [
+  { id: "chicken", label: "Chicken", Icon: Egg, hint: "Layers for daily eggs" },
+  { id: "duck", label: "Duck", Icon: Droplets, hint: "Thrives near water pans" },
+  { id: "turkey", label: "Turkey", Icon: Drumstick, hint: "Big birds for December sales" },
+  { id: "goose", label: "Goose", Icon: ShieldAlert, hint: "Loud alarm for intruders" },
+  { id: "quail", label: "Quail", Icon: Feather, hint: "Tiny footprint, premium eggs" },
+  { id: "guinea-fowl", label: "Guinea fowl", Icon: Bug, hint: "Eats ticks and shamba pests" },
 ];
 
 function OnboardingPage() {
@@ -133,7 +134,7 @@ function OnboardingPage() {
                           : "border-border hover:border-primary/50",
                       )}
                     >
-                      <span className="text-2xl">{p.emoji}</span>
+                      <p.Icon className={cn("h-6 w-6", active ? "text-primary" : "text-muted-foreground")} strokeWidth={1.75} />
                       <span className="font-display text-base">{p.label}</span>
                       <span className="text-xs text-muted-foreground">{p.hint}</span>
                     </button>
